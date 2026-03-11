@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 import {
   LayoutGrid,
   LogOut,
@@ -180,19 +181,13 @@ export default function Navbar({ user, myBooking }: NavbarProps) {
                       <span>My Desk</span>
                     </Link>
                   )}
-                  <form
-                    action="/api/auth/signout"
-                    method="POST"
+                  <button
+                    onClick={() => { setDropdownOpen(false); signOut({ callbackUrl: "/login" }); }}
+                    className="flex w-full items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"
                   >
-                    <button
-                      type="submit"
-                      className="flex w-full items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"
-                      onClick={() => setDropdownOpen(false)}
-                    >
-                      <LogOut size={15} />
-                      <span>Sign out</span>
-                    </button>
-                  </form>
+                    <LogOut size={15} />
+                    <span>Sign out</span>
+                  </button>
                 </div>
               )}
             </div>
@@ -273,15 +268,13 @@ export default function Navbar({ user, myBooking }: NavbarProps) {
                   <p className="text-xs text-slate-400">{user.email}</p>
                 </div>
               </div>
-              <form action="/api/auth/signout" method="POST">
-                <button
-                  type="submit"
-                  className="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
-                >
-                  <LogOut size={18} />
-                  Sign out
-                </button>
-              </form>
+              <button
+                onClick={() => signOut({ callbackUrl: "/login" })}
+                className="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+              >
+                <LogOut size={18} />
+                Sign out
+              </button>
             </div>
           </div>
         </div>

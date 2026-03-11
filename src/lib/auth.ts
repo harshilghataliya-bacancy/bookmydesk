@@ -26,10 +26,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return false;
       }
 
-      // TODO: Re-enable for production
-      // if (!email.endsWith("@bacancy.com")) {
-      //   return "/unauthorized";
-      // }
+      if (!email.endsWith("@bacancy.com")) {
+        return "/unauthorized";
+      }
 
       try {
         await prisma.user.upsert({

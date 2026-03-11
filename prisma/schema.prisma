@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  avatarUrl String?
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  booking   Booking?
+
+  @@map("users")
+}
+
+model Floor {
+  id           String    @id @default(uuid())
+  name         String
+  displayOrder Int       @default(0)
+  createdAt    DateTime  @default(now())
+  sections     Section[]
+
+  @@map("floors")
+}
+
+model Section {
+  id        String   @id @default(uuid())
+  floorId   String
+  label     String
+  createdAt DateTime @default(now())
+  floor     Floor    @relation(fields: [floorId], references: [id], onDelete: Cascade)
+  rooms     Room[]
+
+  @@map("sections")
+}
+
+model Room {
+  id        String   @id @default(uuid())
+  sectionId String
+  name      String
+  rows      Int
+  cols      Int
+  createdAt DateTime @default(now())
+  section   Section  @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  desks     Desk[]
+
+  @@map("rooms")
+}
+
+model Desk {
+  id         String   @id @default(uuid())
+  roomId     String
+  deskNumber Int
+  row        Int
+  col        Int
+  isActive   Boolean  @default(true)
+  isReserved Boolean  @default(false)
+  room       Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  booking    Booking?
+
+  @@map("desks")
+}
+
+model Booking {
+  id         String   @id @default(uuid())
+  deskId     String   @unique
+  userId     String   @unique
+  isReserved Boolean  @default(false)
+  bookedAt   DateTime @default(now())
+  desk       Desk     @relation(fields: [deskId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("bookings")
+}

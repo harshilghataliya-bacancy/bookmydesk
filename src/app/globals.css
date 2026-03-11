@@ -1,0 +1,224 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Core palette */
+  --blue-primary: #1A56DB;
+  --blue-deep: #1344B0;
+  --blue-light: #DBEAFE;
+  --blue-mist: #EFF6FF;
+  --blue-ink: #0F2D6B;
+
+  --red-booked: #EF4444;
+  --red-soft: #FEE2E2;
+  --green-mine: #22C55E;
+  --green-soft: #DCFCE7;
+
+  --slate-950: #020617;
+  --slate-900: #0F172A;
+  --slate-800: #1E293B;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748B;
+  --slate-400: #94A3B8;
+  --slate-300: #CBD5E1;
+  --slate-200: #E2E8F0;
+  --slate-100: #F1F5F9;
+  --slate-50: #F8FAFC;
+
+  --background: #FAFBFD;
+  --foreground: var(--slate-900);
+  --card: #FFFFFF;
+  --card-border: var(--slate-200);
+  --muted: var(--slate-100);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03), 0 1px 3px 0 rgb(0 0 0 / 0.04);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.06), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  --shadow-card: 0 1px 3px 0 rgb(15 23 42 / 0.04), 0 1px 2px -1px rgb(15 23 42 / 0.06);
+  --shadow-card-hover: 0 4px 12px -2px rgb(15 23 42 / 0.08), 0 2px 6px -2px rgb(15 23 42 / 0.05);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  color: var(--foreground);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Subtle grid texture for page backgrounds */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--slate-200) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--slate-200) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-grid-fine {
+  background-image:
+    linear-gradient(to right, rgb(203 213 225 / 0.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(203 213 225 / 0.3) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+.card-hover:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+}
+
+/* Desk cell transitions */
+.desk-cell {
+  transition: background-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+.desk-cell:hover:not(:disabled) {
+  transform: scale(1.06);
+}
+
+/* Floor plan background */
+.floor-plan-bg {
+  background-color: #E8EDFB;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgb(186 199 237 / 0.4) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* Hatched pattern for disabled desks */
+.desk-hatched {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 3px,
+    rgb(203 213 225 / 0.4) 3px,
+    rgb(203 213 225 / 0.4) 4px
+  );
+}
+
+/* Desk shape - top-down view with subtle 3D */
+.desk-shape {
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 2px 0 0 rgb(0 0 0 / 0.06);
+}
+.desk-shape::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 25%;
+  right: 25%;
+  height: 4px;
+  border-radius: 0 0 4px 4px;
+  background: inherit;
+  opacity: 0.5;
+  filter: brightness(0.92);
+}
+
+/* Pulse for reserved-for-you desks */
+@keyframes reservePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(245 158 11 / 0.4); }
+  50% { box-shadow: 0 0 0 6px rgb(245 158 11 / 0); }
+}
+.animate-reserve-pulse {
+  animation: reservePulse 2s ease-in-out infinite;
+}
+
+/* Scale-in animation for modals */
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.animate-scale-in {
+  animation: scaleIn 200ms ease-out;
+}
+
+/* Mono text utility */
+.font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--slate-300);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--slate-400);
+}
+
+/* Toast animation */
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-in {
+  animation: slideIn 300ms ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 400ms ease-out;
+}
+
+/* Staggered children animation */
+.stagger-children > * {
+  animation: fadeIn 400ms ease-out backwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 360ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 420ms; }
+
+/* Custom select — hide native arrow, add inset chevron */
+select.filter-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 32px;
+}
+
+/* Focus ring */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--blue-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}

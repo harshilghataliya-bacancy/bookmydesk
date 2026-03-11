@@ -8,7 +8,6 @@ import {
   DoorOpen,
   Loader2,
   ChevronRight,
-  Grid3X3,
   Lock,
   User,
   Search,
@@ -54,7 +53,7 @@ interface SearchResult {
 }
 
 export default function DashboardPage() {
-  const { data: session } = useSession();
+  useSession();
   const [rooms, setRooms] = useState<RoomItem[]>([]);
   const [myBooking, setMyBooking] = useState<MyBooking | null>(null);
   const [loading, setLoading] = useState(true);

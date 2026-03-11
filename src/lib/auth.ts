@@ -14,7 +14,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: "jwt",
   },
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ user, account }) {
       console.log("[AUTH] signIn callback triggered", {
         email: user.email,
         provider: account?.provider,
@@ -53,7 +53,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       return true;
     },
-    async jwt({ token, trigger }) {
+    async jwt({ token }) {
       if (token.email) {
         try {
           const dbUser = await prisma.user.findUnique({

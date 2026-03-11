@@ -10,7 +10,6 @@ import {
   User,
   X,
   Lock,
-  Check,
   ShieldCheck,
   Unlock,
 } from "lucide-react";

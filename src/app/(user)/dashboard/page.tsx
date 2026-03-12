@@ -156,6 +156,73 @@ export default function DashboardPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      {/* Hackathon Hero Banner */}
+      <div className="mb-8 rounded-2xl overflow-hidden relative" style={{ background: "#040f0e" }}>
+        {/* Base gradient — exact poster teal */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(ellipse 70% 60% at 50% 50%, #1b6b5a 0%, #115c4a 20%, #0b4035 40%, #072a24 60%, #041a17 80%, #040f0e 100%)
+            `,
+          }}
+        />
+        {/* Dot grid — circuit texture */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "radial-gradient(circle, rgba(94,234,212,0.18) 1px, transparent 1px)",
+            backgroundSize: "20px 20px",
+          }}
+        />
+        {/* Bright center glow */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse 40% 45% at 50% 48%, rgba(32,180,155,0.18) 0%, transparent 100%)",
+          }}
+        />
+
+        <div className="relative px-6 sm:px-10 py-12 sm:py-16 text-center">
+          {/* Top badge */}
+          <div className="inline-flex items-center px-5 py-2.5 rounded-full bg-[#0a0a0a]/80 border border-white/[0.08] mb-7">
+            <span className="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-white/90">
+              The Ultimate AI Battle Begins
+            </span>
+          </div>
+
+          {/* Title */}
+          <h2
+            className="text-4xl sm:text-5xl lg:text-[4.2rem] font-black tracking-tight leading-[1.1] mb-4"
+            style={{
+              background: "linear-gradient(180deg, #ffffff 0%, #c8d6d4 50%, rgba(255,255,255,0.35) 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              fontFamily: "'DM Sans', system-ui, sans-serif",
+            }}
+          >
+            AI MAHAKURUKSHETRA
+          </h2>
+
+          {/* Tagline */}
+          <p className="text-lg sm:text-xl font-medium tracking-wide text-white/65 mb-9">
+            Think, Build, and Launch a Product.
+          </p>
+
+          {/* Date & Time */}
+          <div className="inline-flex items-center gap-3 sm:gap-4 px-6 py-3.5 rounded-lg border border-[#5eead4]/15 bg-[#5eead4]/[0.03] mb-5">
+            <span className="text-sm sm:text-base font-bold text-white">14 March 2026</span>
+            <span className="w-px h-4 bg-white/15" />
+            <span className="text-sm sm:text-base text-white/50">9:00 AM – 7:00 PM</span>
+          </div>
+
+          {/* Location */}
+          <p className="text-sm text-white/30">
+            Location: <span className="font-semibold text-white/55">Bacancy Technology</span>
+          </p>
+        </div>
+      </div>
+
       {/* My Desk Banner */}
       {myBooking && (
         <Link
